@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+:root {
+  --color-while: #f0f0f0;
+  --color-black: #424242;
+  --color-primary: #008b8b;
+  --color-secoundary: #c4ebeb;
+
+  --bg-selected: var(--color-while);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  width: 100vw;
+  margin: 0;
+  line-height: 1.8;
+  font-family: 'Roboto', sans-serif;
+  color: var(--color-black);
+  background-color: var(--color-while);
+}
+
+h1, h2, h3 {
+  line-height: 1;
+}
+
+/* HEADER */
+
+.header {
+  background-color: var(--color-primary);
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 6vw), 0 100%);
+  padding: 6rem 0 calc(6rem + 3vw);
+  margin: 0 0 6vw;
+}
+
+.header-title {
+  text-align: center;
+  font-size: min(4.5rem, 20vw);
+  color: var(--bg-selected);
+  text-shadow: 2px 2px 5px #5a5a5a;
+  margin: 0;
+}
+
+/* CENTER-BOX */
+
+.center-box {
+  display: flex;
+  justify-content: center;
+  margin: 1em;
+  font-size: 1.5rem;
+}
+
+
+/* BUTTON */
+
+.button {
+  padding: 0.8em;
+  font-size: 1em;
+  border: none;
+  border-radius: 5px 5px;
+  background-color: var(--bg-selected);
+  box-shadow: 0 0 4px var(--bg-selected);
+}
+
+.button + .button {
+  margin-left: .5em;
+}
+
+.button:hover, .button:focus {
+  filter: brightness(0.8);
+}
+
+.button:active {
+  filter: brightness(0.6);
+}
+
+/* COLORS */
+
+.bg-primary {
+  --bg-selected: var(--color-primary);
+  background-color: var(--color-primary);
+}
+
+.bg-secoundary {
+  --bg-selected: var(--color-secoundary);
+  background-color: var(--color-secoundary);
+}
+
+.color-white {
+  color: var(--color-while);
+}
+
+/* RANDOM UTILS */
+
+.bold {
+  font-weight: bold;
+}
