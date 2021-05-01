@@ -9,33 +9,23 @@
   --bg-selected: var(--color-while);
 }
 
-* {
-  box-sizing: border-box;
-}
-
-body {
-  width: 100vw;
-  margin: 0;
+.Welcome {
+  min-height: 100vh;
   line-height: 1.8;
-  font-family: 'Roboto', sans-serif;
   color: var(--color-black);
   background-color: var(--color-while);
 }
 
-h1, h2, h3 {
-  line-height: 1;
-}
-
 /* HEADER */
 
-.header {
+.Welcome .header {
   background-color: var(--color-primary);
   clip-path: polygon(0 0, 100% 0, 100% calc(100% - 6vw), 0 100%);
   padding: 6rem 0 calc(6rem + 3vw);
   margin: 0 0 6vw;
 }
 
-.header-title {
+.Welcome .header-title {
   text-align: center;
   font-size: min(4.5rem, 20vw);
   color: var(--bg-selected);
@@ -45,36 +35,13 @@ h1, h2, h3 {
 
 /* CENTER-BOX */
 
-.center-box {
+.Welcome .center-box {
   display: flex;
   justify-content: center;
   margin: 1em;
   font-size: 1.5rem;
 }
 
-
-/* BUTTON */
-
-.button {
-  padding: 0.8em;
-  font-size: 1em;
-  border: none;
-  border-radius: 5px 5px;
-  background-color: var(--bg-selected);
-  box-shadow: 0 0 4px var(--bg-selected);
-}
-
-.button + .button {
-  margin-left: .5em;
-}
-
-.button:hover, .button:focus {
-  filter: brightness(0.8);
-}
-
-.button:active {
-  filter: brightness(0.6);
-}
 
 /* COLORS */
 
@@ -96,4 +63,8 @@ h1, h2, h3 {
 
 .bold {
   font-weight: bold;
+}
+
+.margin-left {
+  margin-left: .5em;
 }
