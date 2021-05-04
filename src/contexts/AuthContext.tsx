@@ -5,7 +5,7 @@ import firebase from 'firebase/app'
 import 'firebase/analytics'
 import 'firebase/auth'
 
-firebase.initializeApp({
+const app = firebase.initializeApp({
   apiKey:             process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain:         process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
   projectId:          process.env.REACT_APP_FIREBASE_PROJECT_ID,
@@ -15,20 +15,30 @@ firebase.initializeApp({
   measurementId:      process.env.REACT_APP_FIREBASE_MEASUREMENT_ID
 })
 
+const auth = app.auth();
+
 // AuthContext methods
 
-function signup(email: string, password: string) {
-  return firebase.auth().createUserWithEmailAndPassword(email, password)
-}
+// function signupWithEmail(email: string, password: string) {
+//   return firebase.auth().createUserWithEmailAndPassword(email, password)
+// }
 
-function loginGoogle() {
-  const provider = new firebase.auth.GoogleAuthProvider()
-  return firebase.auth().signInWithRedirect(provider)
-}
+// function signinWithEmail(email: string, password: string) {
+//   return firebase.auth().signInWithEmailAndPassword(email, password)
+// }
 
-function getRedirectResult() {
-  return firebase.auth().getRedirectResult()
-}
+// function signinWithGoogle() {
+//   const provider = new firebase.auth.GoogleAuthProvider()
+//   return firebase.auth().signInWithRedirect(provider)
+// }
+
+// function signOut() {
+//   return firebase.auth().signOut()
+// }
+
+// function getRedirectResult() {
+//   return firebase.auth().getRedirectResult()
+// }
 
 function onAuthStateChanged(callback: (user: firebase.User | null) => any) {}
 
@@ -36,22 +46,21 @@ function onAuthStateChanged(callback: (user: firebase.User | null) => any) {}
 
 export interface IAuthContext {
   user: firebase.User | null,
-  signup: (email: string, password: string) => Promise<firebase.auth.UserCredential>,
-  loginGoogle: () => Promise<void>,
-  getRedirectResult: () => Promise<firebase.auth.UserCredential>,
+  // signupWithEmail: (email: string, password: string) => Promise<firebase.auth.UserCredential>,
+  // signinWithEmail: (email: string, password: string) => Promise<firebase.auth.UserCredential>,
+  // signinWithGoogle: () => Promise<void>,
+  // getRedirectResult: () => Promise<firebase.auth.UserCredential>,
+  auth: firebase.auth.Auth,
   onAuthStateChanged: (callback: (user: firebase.User | null) => any) => void
 }
 
 const AuthContext = React.createContext<IAuthContext>({
   user: null,
-  signup,
-  loginGoogle,
-  getRedirectResult,
+  auth,
   onAuthStateChanged
 })
 
 AuthContext.displayName = "AuthContext"
-
 export default AuthContext
 export const AuthConsumer = AuthContext.Consumer;
 
@@ -99,7 +108,7 @@ export class AuthProvider extends Component<{}, IState> {
   render() {
     const context : IAuthContext = {
       user: this.state.user,
-      signup, loginGoogle, getRedirectResult,
+      auth,
       onAuthStateChanged: this.onAuthStateChanged
     }
 

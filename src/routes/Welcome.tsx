@@ -26,7 +26,7 @@ export default class App extends Component<RouteComponentProps> {
               <h2>Lorem, ipsum dolor.</h2>
               <p style={{ maxWidth: "60ch", marginBottom: "1.5em" }}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi saepe deserunt ipsa laudantium obcaecati voluptatum dolorem ipsam voluptatibus reprehenderit harum, dolorum cum ex asperiores.</p>
               <Link to="/auth/signup"><Button variant="primary">Utwórz konto</Button></Link>
-              <Link to="/auth/login"><Button variant="secondary" className="margin-left">Zaloguj</Button></Link>
+              <Link to="/auth/signin"><Button variant="secondary" className="margin-left">Zaloguj</Button></Link>
             </div>
           </div>
         </main>
