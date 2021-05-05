@@ -1,15 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
-
-:root {
+.Welcome {
   --color-while: #f0f0f0;
   --color-black: #424242;
   --color-primary: #008b8b;
   --color-secoundary: #c4ebeb;
-
   --bg-selected: var(--color-while);
-}
 
-.Welcome {
   min-height: 100vh;
   line-height: 1.8;
   color: var(--color-black);

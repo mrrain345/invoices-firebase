@@ -69,7 +69,7 @@ export default class AuthAction extends Component<RouteComponentProps, IState> {
       <Container className="mt-4">
         <Alert variant={this.state.success ? 'success' : 'danger'}>
           {this.state.message}<br/>
-          <Link to="/">Wróć do strony głównej</Link>.
+          <Link to="/" className="alert-link">Przejdź do strony głównej</Link>.
         </Alert>
       </Container>
     )

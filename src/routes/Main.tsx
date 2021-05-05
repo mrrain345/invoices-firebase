@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import AuthContext from '../contexts/AuthContext'
 import { RouteComponentProps, Link } from "react-router-dom";
+import NavMenu from '../components/NavMenu'
 
 export default class Main extends Component<RouteComponentProps> {
 
@@ -16,6 +17,7 @@ export default class Main extends Component<RouteComponentProps> {
   render() {
     return (
       <>
+        <NavMenu/>
         <Link to="/auth/signout">Wyloguj</Link>
       </>
     )

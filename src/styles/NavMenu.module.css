@@ -1,0 +1,91 @@
+.NavMenu {
+  user-select: none;
+  background-color: var(--bs-cyan);
+  position: fixed;
+  color: var(--bs-white);
+  text-align: center;
+  left: 0;
+  right: 0;
+}
+
+.menuButton {
+  position: absolute;
+  left: 0;
+  padding: 1em;
+}
+
+.logo a {
+  display: inline-block;
+  font-size: 1.25rem;
+  padding: 0.6em;
+  font-weight: bold;
+  text-decoration: none;
+  color: var(--bs-white);
+}
+
+.NavMenu > ol {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  background-color: var(--bs-cyan);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  transform-origin: top;
+  transform: scaleY(0);
+  transition: transform 350ms ease-in-out;
+  width: 100%;
+  text-align: left;
+}
+
+.NavMenu > ol > li {
+  opacity: 0;
+  transition: opacity 150ms ease-in-out;
+}
+
+.NavMenu > ol a {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  padding: 0.5em 0.5em 0.5em 1em;
+  text-decoration: none;
+  color: var(--bs-white);
+}
+
+#expandNav {
+  display: none;
+}
+
+#expandNav:checked ~ ol {
+  transform: scaleY(1);
+}
+
+#expandNav:checked ~ ol > li {
+  opacity: 1;
+  transition: opacity 250ms ease-in-out 250ms;
+}
+
+.NavMenu ol > li:hover a {
+  color: rgb(208, 236, 255);
+}
+
+@media (min-width: 800px) {
+  .menuButton {
+    display: none;
+  }
+
+  .NavMenu > ol {
+    transform: scaleY(1);
+    flex-direction: row;
+    top: 0;
+    background: transparent;
+    padding: 0.5em;
+    transform-origin: center;
+  }
+
+  .NavMenu > ol > li {
+    opacity: 1;
+  }
+}
