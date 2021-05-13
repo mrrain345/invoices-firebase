@@ -6,6 +6,7 @@
   text-align: center;
   left: 0;
   right: 0;
+  z-index: 1000;
 }
 
 .menuButton {
@@ -68,7 +69,7 @@
 }
 
 .NavMenu ol > li:hover a {
-  color: rgb(208, 236, 255);
+  text-decoration: underline;
 }
 
 @media (min-width: 800px) {

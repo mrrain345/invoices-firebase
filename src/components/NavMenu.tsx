@@ -15,7 +15,7 @@ export default class NavMenu extends Component {
           <li><Link to="#">nav1</Link></li>
           <li><Link to="#">nav2</Link></li>
           <li><Link to="#">nav3</Link></li>
-          <li><Link to="#">nav4</Link></li>
+          <li><Link to="/auth/signout">Wyloguj</Link></li>
         </ol>
       </nav>
       <div style={{paddingBottom: '3.5rem'}}></div>

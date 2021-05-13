@@ -73,32 +73,30 @@ export default class Signup extends Component<RouteComponentProps, IState> {
     return (
       <Container className="d-flex align-items-center justify-content-center flex-column" style={{ minHeight: "100vh", maxWidth: "20rem" }}>
         {this.state.error ? <Alert variant="danger" className="w-100 mb-3">{this.state.error}</Alert> : <></> }
-        <Card>
-          <Card.Body>
-            <h2 className="text-center mb-4">Utwórz Konto</h2>
-            <Form>
-              <Form.Group className="mb-3" id="email">
-                <Form.Label>Email</Form.Label>
-                <Form.Control type="email" ref={this.emailRef} required></Form.Control>
-              </Form.Group>
+        <Card body>
+          <h2 className="text-center mb-4">Utwórz Konto</h2>
+          <Form>
+            <Form.Group className="mb-3" id="email">
+              <Form.Label>Email</Form.Label>
+              <Form.Control type="email" ref={this.emailRef} required></Form.Control>
+            </Form.Group>
 
-              <Form.Group className="mb-3" id="password">
-                <Form.Label>Hasło</Form.Label>
-                <Form.Control type="password" ref={this.passwordRef} required></Form.Control>
-              </Form.Group>
+            <Form.Group className="mb-3" id="password">
+              <Form.Label>Hasło</Form.Label>
+              <Form.Control type="password" ref={this.passwordRef} required></Form.Control>
+            </Form.Group>
 
-              <Form.Group className="mb-4" id="password-confirm">
-                <Form.Label>Powtórz hasło</Form.Label>
-                <Form.Control type="password" ref={this.passwordConfirmRef} required></Form.Control>
-              </Form.Group>
+            <Form.Group className="mb-4" id="password-confirm">
+              <Form.Label>Powtórz hasło</Form.Label>
+              <Form.Control type="password" ref={this.passwordConfirmRef} required></Form.Control>
+            </Form.Group>
 
-              <Button type="submit" onClick={this.signup} className="w-100">Utwórz Konto</Button>
-            </Form>
+            <Button type="submit" onClick={this.signup} className="w-100">Utwórz Konto</Button>
+          </Form>
 
-            <hr className="m-4"/>
+          <hr className="m-4"/>
 
-            <Button style={{ backgroundColor: "#FF0000" }} onClick={this.signinWithGoogle} className="w-100">Zaloguj przez Google</Button>
-          </Card.Body>
+          <Button style={{ backgroundColor: "#FF0000" }} onClick={this.signinWithGoogle} className="w-100">Zaloguj przez Google</Button>
         </Card>
         <div className="w-100 text-center mt-2">
           Posiadasz już konto? <Link to="/auth/signin">Zaloguj się</Link>.
