@@ -35,8 +35,8 @@ export default class Main extends Component<RouteComponentProps> {
           <HeaderForm ref={this.headerRef}/>
 
           <Row className="mb-4">
-            <Col lg="6" className="mb-4 mb-lg-0"><SubjectForm name="Sprzedawca" ref={this.sellerRef}/></Col>
-            <Col lg="6"><SubjectForm name="Nabywca" ref={this.buyerRef}/></Col>
+            <Col lg="6" className="mb-4 mb-lg-0"><SubjectForm seller ref={this.sellerRef}/></Col>
+            <Col lg="6"><SubjectForm ref={this.buyerRef}/></Col>
           </Row>
 
           <ProductListForm ref={this.productsRef}/>

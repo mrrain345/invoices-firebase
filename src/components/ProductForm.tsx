@@ -42,35 +42,38 @@ export default class ProductForm extends Component<{}, IState> {
   render() {
     return (
       <Row>
-        <Col className="mb-3" xs="12" md="4">
+        <Col className="mb-3" xs="12" md="3" xl="6">
           <Form.Group as={Row}>
             <Form.Label column sm="4" md="12">Nazwa</Form.Label>
             <Col sm="8" md="12"><Form.Control ref={this.nameRef}/></Col>
           </Form.Group>
         </Col>
 
-        <Col className="mb-3" xs="12" md="2">
-          <Form.Group as={Row}>
-            <Form.Label column sm="4" md="12">Jednostka</Form.Label>
-            <Col sm="8" md="12"><Form.Control ref={this.unitRef}/></Col>
-          </Form.Group>
-        </Col>
-
-        <Col className="mb-3" xs="12" md="2">
+        <Col className="mb-3" xs="12" md="3" xl="2">
           <Form.Group as={Row}>
             <Form.Label column sm="4" md="12">Ilość</Form.Label>
-            <Col sm="8" md="12"><Form.Control type="number" min="0" ref={this.countRef}/></Col>
+            <Col sm="8" md="12">
+              <InputGroup>
+                <Form.Control type="number" min="0" ref={this.countRef}/>
+                <Form.Control defaultValue="szt." style={{ width: "4em", flex: "0 1 auto"}} />
+              </InputGroup>
+            </Col>
           </Form.Group>
         </Col>
 
-        <Col className="mb-3" xs="12" md="2">
+        <Col className="mb-3" xs="12" md="3" xl="2">
           <Form.Group as={Row}>
             <Form.Label column sm="4" md="12">Cena netto</Form.Label>
-            <Col sm="8" md="12"><Form.Control type="number" min="0" ref={this.priceRef}/></Col>
+            <Col sm="8" md="12">
+              <InputGroup>
+                <Form.Control type="number" min="0" ref={this.priceRef}/>
+                <Form.Control defaultValue="PLN" style={{ width: "4em", flex: "0 1 auto"}} />
+              </InputGroup>
+            </Col>
           </Form.Group>
         </Col>
 
-        <Col className="mb-3" xs="12" md="2">
+        <Col className="mb-3" xs="12" md="3" xl="2">
           <Form.Group as={Row}>
             <Form.Label column sm="4" md="12">VAT</Form.Label>
             <Col sm="8" md="12">
