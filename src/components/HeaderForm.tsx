@@ -1,4 +1,4 @@
-import React, { Component, createRef } from 'react'
+import React, { Component } from 'react'
 import { Card, Form, Row, Col } from 'react-bootstrap'
 
 interface IState {
@@ -8,10 +8,6 @@ interface IState {
 }
 
 export default class HeaderForm extends Component<{}, IState> {
-
-  invoiceIdRef = createRef<HTMLInputElement>()
-  issueDateRef = createRef<HTMLInputElement>()
-  saleDateRef = createRef<HTMLInputElement>()
 
   constructor(props: {}) {
     super(props)
@@ -26,12 +22,9 @@ export default class HeaderForm extends Component<{}, IState> {
 
   getDate = () => new Date().toJSON().split('T')[0]
 
-  onChanged = (event: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({
-      invoiceId: this.invoiceIdRef.current?.value ?? "",
-      issueDate: this.issueDateRef.current?.value ?? this.getDate(),
-      saleDate: this.saleDateRef.current?.value ?? this.getDate(),
-    })
+  onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target
+    this.setState({ [name]: value } as Pick<IState, keyof IState>)
   }
 
   render() {
@@ -40,32 +33,34 @@ export default class HeaderForm extends Component<{}, IState> {
     return (
       <Card body className="mb-4">
         <Row>
-          <Col className="mb-3" xs="12" md="4" lg="6">
-            <Form.Group as={Row}>
-              <Form.Label column sm="4" md="12">Numer faktury</Form.Label>
+
+          <Col xs="12" md="4" lg="6">
+            <Form.Group as={Form.Label} className="row">
+                <Col sm="4" md="12" className="col-form-label">Numer faktury</Col>
+                <Col sm="8" md="12">
+                  <Form.Control name="invoiceId" value={invoiceId} onChange={this.onChange}/>
+                </Col>
+            </Form.Group>
+          </Col>
+
+          <Col xs="12" md="4" lg="3">
+            <Form.Group as={Form.Label} className="row">
+              <Col sm="4" md="12" className="col-form-label">Data wystawienia</Col>
               <Col sm="8" md="12">
-                <Form.Control value={invoiceId} onChange={this.onChanged} ref={this.invoiceIdRef}/>
+                <Form.Control type="date" name="issueDate" value={issueDate} onChange={this.onChange}/>
               </Col>
             </Form.Group>
           </Col>
 
-          <Col className="mb-3" xs="12" md="4" lg="3">
-            <Form.Group as={Row}>
-              <Form.Label column sm="4" md="12">Data wystawienia</Form.Label>
+          <Col xs="12" md="4" lg="3">
+            <Form.Group as={Form.Label} className="row">
+              <Col sm="4" md="12" className="col-form-label">Data sprzedaży</Col>
               <Col sm="8" md="12">
-                <Form.Control type="date" value={issueDate} onChange={this.onChanged} ref={this.issueDateRef}/>
+                <Form.Control type="date" name="saleDate" value={saleDate} onChange={this.onChange}/>
               </Col>
             </Form.Group>
           </Col>
 
-          <Col className="mb-3" xs="12" md="4" lg="3">
-            <Form.Group as={Row}>
-              <Form.Label column sm="4" md="12">Data sprzedaży</Form.Label>
-              <Col sm="8" md="12">
-                <Form.Control type="date" value={saleDate} onChange={this.onChanged} ref={this.saleDateRef}/>
-              </Col>
-            </Form.Group>
-          </Col>
         </Row>
       </Card>
     )

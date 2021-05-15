@@ -7,7 +7,7 @@ export default class ProductListForm extends Component {
   render() {
     return (
       <Card body className="mb-4">
-        <ProductForm/>
+        <ProductForm index={0}/>
       </Card>
     )
   }

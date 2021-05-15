@@ -1,4 +1,4 @@
-import React, { Component, createRef } from 'react'
+import React, { Component } from 'react'
 import AuthContext from '../contexts/AuthContext'
 import { RouteComponentProps } from "react-router-dom"
 import NavMenu from '../components/NavMenu'
@@ -13,12 +13,6 @@ export default class Main extends Component<RouteComponentProps> {
 
   static contextType = AuthContext
   context!: React.ContextType<typeof AuthContext>
-
-  headerRef = createRef<HeaderForm>()
-  sellerRef = createRef<SubjectForm>()
-  buyerRef = createRef<SubjectForm>()
-  productsRef = createRef<ProductListForm>()
-  paymentRef = createRef<PaymentForm>()
   
 
   componentDidMount() {
@@ -32,15 +26,15 @@ export default class Main extends Component<RouteComponentProps> {
       <NavMenu/>
       <Container className="mt-4">
         <Form>
-          <HeaderForm ref={this.headerRef}/>
+          <HeaderForm/>
 
           <Row className="mb-4">
-            <Col lg="6" className="mb-4 mb-lg-0"><SubjectForm seller ref={this.sellerRef}/></Col>
-            <Col lg="6"><SubjectForm ref={this.buyerRef}/></Col>
+            <Col lg="6" className="mb-4 mb-lg-0"><SubjectForm seller/></Col>
+            <Col lg="6"><SubjectForm/></Col>
           </Row>
 
-          <ProductListForm ref={this.productsRef}/>
-          <PaymentForm ref={this.paymentRef}/>
+          <ProductListForm/>
+          <PaymentForm/>
 
           <Row className="mt-4 justify-content-end">
             <Col sm="6" md="4" lg="3" xl="2">

@@ -1,6 +1,7 @@
 import ReactDOM from 'react-dom'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import { AuthProvider } from './contexts/AuthContext'
+import './style.css'
 
 // routes
 import Main from './routes/Main'

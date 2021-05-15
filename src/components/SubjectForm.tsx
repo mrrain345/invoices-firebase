@@ -1,4 +1,4 @@
-import React, { Component, createRef } from 'react'
+import React, { Component } from 'react'
 import { Card, Form, Col, Row, InputGroup, Button, OverlayTrigger, Tooltip, Modal } from 'react-bootstrap'
 
 import AddIcon from '@material-ui/icons/Add';
@@ -26,11 +26,6 @@ interface IState {
 
 export default class SubjectForm extends Component<IProps, IState> {
 
-  presetIdRef = createRef<HTMLSelectElement>()
-  nameRef = createRef<HTMLTextAreaElement>()
-  addressRef = createRef<HTMLTextAreaElement>()
-  nipRef = createRef<HTMLInputElement>()
-
   constructor(props: IProps) {
     super(props)
 
@@ -47,23 +42,19 @@ export default class SubjectForm extends Component<IProps, IState> {
   
 
   presetChanged = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const presetId = parseInt(this.presetIdRef.current?.value ?? "0")
-    const presets = this.state.presets
+    const presetId = parseInt(event.target.value ?? "0")
 
-    if (presetId < 1 || presetId > presets.length) {
+    if (presetId < 1 || presetId > this.state.presets.length) {
       return this.setState({ presetId: 0, name: "", address: "", nip: "" })
     }
 
-    const { name, address, nip } = presets[presetId-1]
+    const { name, address, nip } = this.state.presets[presetId-1]
     this.setState({ presetId, name, address, nip })
   }
 
-  onChanged = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const name = this.nameRef.current?.value ?? ""
-    const address = this.addressRef.current?.value ?? ""
-    const nip = this.nipRef.current?.value ?? ""
-
-    this.setState({ name, address, nip })
+  onChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = event.target
+    this.setState({ [name]: value } as Pick<IState, keyof Preset>)
   }
 
   canSavedPreset = () => {
@@ -105,56 +96,51 @@ export default class SubjectForm extends Component<IProps, IState> {
 
   render() {
     const { presetId, presets, name, address, nip, removeModal } = this.state
-
-    const options: JSX.Element[] = []
-    for (let i = 0; i < presets.length; i++) {
-      options.push(
-        <option key={i+1} value={i+1}>{presets[i].name}</option>
-      )
-    }
+    const options = presets.map((preset, i) => <option key={i+1} value={i+1}>{preset.name.split('\n')[0]}</option>)
 
     return (
       <Card>
         <Card.Header>{this.props.seller ? "Sprzedawca" : "Nabywca"}</Card.Header>
         <Card.Body>
-          <Form.Group as={Row} className="mb-3">
-            <Form.Label column sm="4" md="3" xl="2">Preset</Form.Label>
+
+          <Form.Group as={Form.Label} className="row">
+              <Col sm="4" md="3" xl="2" className="col-form-label">Preset</Col>
+              <Col sm="8" md="9" xl="10">
+                <InputGroup>
+                  <Form.Control as="select" name="presetId" value={presetId} onChange={this.presetChanged}>
+                    <option value={0}>(nowy)</option>
+                    { options }
+                  </Form.Control>
+                  <OverlayTrigger placement="top" overlay={<Tooltip id="tooltip-save">{ presetId === 0 ? 'Dodaj' : 'Zapisz' }</Tooltip> }>
+                    <Button variant="outline-success" onClick={this.savePreset} disabled={!this.canSavedPreset()}>
+                      { presetId === 0 ? <AddIcon/> : <EditIcon/>}
+                    </Button>
+                  </OverlayTrigger>
+                  <OverlayTrigger placement="top" overlay={ <Tooltip id="tooltip-delete">Usuń</Tooltip> }>
+                    <Button variant="outline-danger" onClick={this.removeModalShow} disabled={presetId === 0}><DeleteIcon/></Button>
+                  </OverlayTrigger>
+                </InputGroup>
+              </Col>
+          </Form.Group>
+
+          <Form.Group as={Form.Label} className="row">
+            <Col sm="4" md="3" xl="2" className="col-form-label">Nazwa</Col>
             <Col sm="8" md="9" xl="10">
-              <InputGroup>
-                <Form.Control as="select" value={presetId} onChange={this.presetChanged} ref={this.presetIdRef}>
-                  <option value={0}>(nowy)</option>
-                  {options}
-                </Form.Control>
-                <OverlayTrigger placement="top" overlay={<Tooltip id="tooltip-save">{ presetId === 0 ? 'Dodaj' : 'Zapisz' }</Tooltip> }>
-                  <Button variant="outline-success" onClick={this.savePreset} disabled={!this.canSavedPreset()}>
-                    { presetId === 0 ? <AddIcon/> : <EditIcon/>}
-                  </Button>
-                </OverlayTrigger>
-                <OverlayTrigger placement="top" overlay={ <Tooltip id="tooltip-delete">Usuń</Tooltip> }>
-                  <Button variant="outline-danger" onClick={this.removeModalShow} disabled={presetId === 0}><DeleteIcon/></Button>
-                </OverlayTrigger>
-              </InputGroup>
+              <Form.Control as="textarea" rows={2} name="name" value={name} onChange={this.onChange}/>
             </Col>
           </Form.Group>
 
-          <Form.Group as={Row} className="mb-3">
-            <Form.Label column sm="4" md="3" xl="2">Nazwa</Form.Label>
+          <Form.Group as={Form.Label} className="row">
+            <Col sm="4" md="3" xl="2" className="col-form-label">Adres</Col>
             <Col sm="8" md="9" xl="10">
-              <Form.Control as="textarea" rows={2} value={name} onChange={this.onChanged} ref={this.nameRef}/>
+              <Form.Control as="textarea" rows={2} name="address" value={address} onChange={this.onChange}/>
             </Col>
           </Form.Group>
 
-          <Form.Group as={Row} className="mb-3">
-            <Form.Label column sm="4" md="3" xl="2">Adres</Form.Label>
+          <Form.Group as={Form.Label} className="row">
+            <Col sm="4" md="3" xl="2" className="col-form-label">NIP</Col>
             <Col sm="8" md="9" xl="10">
-              <Form.Control as="textarea" rows={2} value={address} onChange={this.onChanged} ref={this.addressRef}/>
-            </Col>
-          </Form.Group>
-
-          <Form.Group as={Row} className="mb-3">
-            <Form.Label column sm="4" md="3" xl="2">NIP</Form.Label>
-            <Col sm="8" md="9" xl="10">
-              <Form.Control value={nip} onChange={this.onChanged} ref={this.nipRef}/>
+              <Form.Control name="nip" value={nip} onChange={this.onChange}/>
             </Col>
           </Form.Group>
 
